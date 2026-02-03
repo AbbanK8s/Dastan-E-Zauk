@@ -1,0 +1,1792 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dastan-E-Zauk Family Restaurant | Authentic Desi Cuisine</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&family=Playfair+Display:wght@700;800;900&family=Kalam:wght@700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-yellow: #FFD700;
+            --dark-yellow: #FFC107;
+            --light-yellow: #FFF9E6;
+            --accent-red: #DC2626;
+            --dark-bg: #1F1F1F;
+            --text-dark: #2D2D2D;
+            --text-light: #666;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            line-height: 1.6;
+            color: var(--text-dark);
+            overflow-x: hidden;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        /* Header Styles */
+        header {
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            background: rgba(255, 215, 0, 0.98);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+        }
+
+        nav {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 1.2rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 2rem;
+            font-weight: 900;
+            color: var(--accent-red);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            z-index: 1001;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2.5rem;
+            list-style: none;
+            align-items: center;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--dark-bg);
+            font-weight: 600;
+            font-size: 0.95rem;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 3px;
+            background: var(--accent-red);
+            border-radius: 5px;
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .cta-button {
+            background: var(--accent-red);
+            color: white;
+            padding: 0.8rem 2rem;
+            border-radius: 50px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(220, 38, 38, 0.3);
+        }
+
+        /* Mobile Menu Toggle */
+        .mobile-menu-toggle {
+            display: none;
+            flex-direction: column;
+            gap: 6px;
+            cursor: pointer;
+            z-index: 1001;
+            padding: 8px;
+            border-radius: 12px;
+            transition: all 0.3s ease;
+        }
+
+        .mobile-menu-toggle:hover {
+            background: rgba(0,0,0,0.05);
+        }
+
+        .mobile-menu-toggle span {
+            width: 28px;
+            height: 3px;
+            background: var(--dark-bg);
+            transition: all 0.3s ease;
+            border-radius: 3px;
+        }
+
+        .mobile-menu-toggle.active span:nth-child(1) {
+            transform: rotate(45deg) translate(8px, 8px);
+        }
+
+        .mobile-menu-toggle.active span:nth-child(2) {
+            opacity: 0;
+        }
+
+        .mobile-menu-toggle.active span:nth-child(3) {
+            transform: rotate(-45deg) translate(7px, -7px);
+        }
+
+        /* Mobile Navigation */
+        .mobile-nav {
+            position: fixed;
+            top: 0;
+            right: -100%;
+            width: 85%;
+            max-width: 400px;
+            height: 100vh;
+            background: white;
+            box-shadow: -5px 0 30px rgba(0,0,0,0.3);
+            transition: right 0.4s ease;
+            z-index: 999;
+            padding: 6rem 2rem 2rem;
+            overflow-y: auto;
+            border-radius: 30px 0 0 30px;
+        }
+
+        .mobile-nav.active {
+            right: 0;
+        }
+
+        .mobile-nav ul {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 0;
+        }
+
+        .mobile-nav a {
+            text-decoration: none;
+            color: var(--dark-bg);
+            font-weight: 600;
+            font-size: 1.2rem;
+            display: block;
+            padding: 1.2rem 1.5rem;
+            border-radius: 15px;
+            transition: all 0.3s ease;
+            margin-bottom: 0.5rem;
+        }
+
+        .mobile-nav a:hover, .mobile-nav a:active {
+            background: var(--light-yellow);
+            color: var(--accent-red);
+            transform: translateX(10px);
+        }
+
+        .mobile-nav .cta-button {
+            margin-top: 1rem;
+            text-align: center;
+            display: block;
+        }
+
+        /* Mobile Overlay */
+        .mobile-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100vh;
+            background: rgba(0,0,0,0.5);
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+            z-index: 998;
+        }
+
+        .mobile-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        /* Hero Section */
+        .hero {
+            margin-top: 80px;
+            min-height: 90vh;
+            background: linear-gradient(135deg, var(--primary-yellow) 0%, var(--dark-yellow) 100%);
+            display: flex;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+            border-radius: 0 0 60px 60px;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 50%;
+            height: 100%;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 1000"><path d="M0,500 Q250,300 500,500 T1000,500 L1000,1000 L0,1000 Z" fill="rgba(255,255,255,0.1)"/></svg>');
+            background-size: cover;
+        }
+
+        .hero-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 4rem 2rem;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .hero-text h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 4.5rem;
+            font-weight: 900;
+            color: var(--accent-red);
+            line-height: 1.1;
+            margin-bottom: 1.5rem;
+            text-transform: uppercase;
+        }
+
+        .hero-text .tagline {
+            font-family: 'Kalam', cursive;
+            font-size: 1.8rem;
+            color: var(--dark-bg);
+            margin-bottom: 2rem;
+        }
+
+        .hero-text p {
+            font-size: 1.1rem;
+            color: var(--text-dark);
+            margin-bottom: 2rem;
+            line-height: 1.8;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 1.5rem;
+        }
+
+        .btn-primary, .btn-secondary {
+            padding: 1rem 2.5rem;
+            border-radius: 50px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            font-size: 1rem;
+            display: inline-block;
+        }
+
+        .btn-primary {
+            background: var(--accent-red);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 35px rgba(220, 38, 38, 0.4);
+        }
+
+        .btn-secondary {
+            background: white;
+            color: var(--accent-red);
+            border: 2px solid var(--accent-red);
+        }
+
+        .btn-secondary:hover {
+            background: var(--accent-red);
+            color: white;
+        }
+
+        .hero-image {
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero-image img {
+            width: 100%;
+            border-radius: 40px;
+            box-shadow: 0 25px 50px rgba(0,0,0,0.2);
+            animation: float 3s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-20px); }
+        }
+
+        /* Discount Section */
+        .discount-section {
+            background: var(--accent-red);
+            color: white;
+            padding: 3rem 2rem;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            margin: 3rem;
+            border-radius: 40px;
+        }
+
+        .discount-section::before {
+            content: '🌟';
+            position: absolute;
+            font-size: 15rem;
+            opacity: 0.1;
+            top: -50px;
+            left: -50px;
+            animation: rotate 20s linear infinite;
+        }
+
+        @keyframes rotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        .discount-content {
+            max-width: 1000px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+        }
+
+        .discount-content h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .discount-content .offer {
+            font-size: 4rem;
+            font-weight: 800;
+            margin: 1rem 0;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+        }
+
+        /* Menu Section */
+        .menu-section {
+            padding: 6rem 2rem;
+            background: var(--light-yellow);
+            border-radius: 60px 60px 0 0;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        .section-title h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 3.5rem;
+            color: var(--accent-red);
+            margin-bottom: 1rem;
+        }
+
+        .section-title p {
+            font-size: 1.2rem;
+            color: var(--text-light);
+        }
+
+        .menu-container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .menu-category {
+            margin-bottom: 4rem;
+            background: white;
+            padding: 3rem;
+            border-radius: 40px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.08);
+        }
+
+        .category-header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 2rem;
+            padding-bottom: 1rem;
+            border-bottom: 3px solid var(--primary-yellow);
+            border-radius: 5px;
+        }
+
+        .category-header h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.5rem;
+            color: var(--accent-red);
+            text-transform: uppercase;
+        }
+
+        .category-icon {
+            font-size: 2.5rem;
+        }
+
+        .menu-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+        }
+
+        .menu-item {
+            display: flex;
+            justify-space-between;
+            align-items: start;
+            padding: 1.5rem;
+            border-radius: 20px;
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+        }
+
+        .menu-item:hover {
+            background: var(--light-yellow);
+            border-color: var(--primary-yellow);
+            transform: translateX(10px);
+        }
+
+        .item-info h4 {
+            font-size: 1.3rem;
+            color: var(--dark-bg);
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+        }
+
+        .item-info p {
+            font-size: 0.9rem;
+            color: var(--text-light);
+        }
+
+        .item-price {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--accent-red);
+            white-space: nowrap;
+            margin-left: 1rem;
+        }
+
+        /* Kids Section */
+        .kids-section {
+            padding: 6rem 2rem;
+            background: linear-gradient(135deg, #FFE5E5 0%, #FFF9E6 100%);
+            margin: 0 2rem;
+            border-radius: 60px;
+        }
+
+        .kids-container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .kids-menu {
+            background: white;
+            padding: 3rem;
+            border-radius: 40px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.08);
+        }
+
+        /* Reviews Section */
+        .reviews-section {
+            padding: 6rem 2rem;
+            background: white;
+        }
+
+        .reviews-container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .reviews-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .review-card {
+            background: var(--light-yellow);
+            padding: 2.5rem;
+            border-radius: 30px;
+            box-shadow: 0 8px 30px rgba(0,0,0,0.08);
+            transition: all 0.3s ease;
+        }
+
+        .review-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.12);
+        }
+
+        .stars {
+            color: var(--primary-yellow);
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .review-text {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            color: var(--text-dark);
+            margin-bottom: 1.5rem;
+        }
+
+        .reviewer {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .reviewer-avatar {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: var(--primary-yellow);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--accent-red);
+        }
+
+        .reviewer-info h4 {
+            font-size: 1.1rem;
+            color: var(--dark-bg);
+            margin-bottom: 0.2rem;
+        }
+
+        .reviewer-info p {
+            font-size: 0.9rem;
+            color: var(--text-light);
+        }
+
+        /* Gallery Section */
+        .gallery-section {
+            padding: 6rem 2rem;
+            background: var(--light-yellow);
+            margin: 0 2rem;
+            border-radius: 60px;
+        }
+
+        .gallery-container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .gallery-item {
+            position: relative;
+            border-radius: 30px;
+            overflow: hidden;
+            aspect-ratio: 4/3;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+        }
+
+        .gallery-item:hover {
+            transform: scale(1.05);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.2);
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .gallery-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(transparent, rgba(0,0,0,0.8));
+            padding: 2rem;
+            border-radius: 0 0 30px 30px;
+            transform: translateY(100%);
+            transition: transform 0.3s ease;
+        }
+
+        .gallery-item:hover .gallery-overlay {
+            transform: translateY(0);
+        }
+
+        .gallery-overlay h3 {
+            color: white;
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .gallery-overlay p {
+            color: rgba(255,255,255,0.9);
+        }
+
+        /* Footer */
+        footer {
+            background: var(--dark-bg);
+            color: white;
+            padding: 4rem 2rem 2rem;
+            border-radius: 60px 60px 0 0;
+        }
+
+        .footer-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 3rem;
+            margin-bottom: 2rem;
+        }
+
+        .footer-section h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.8rem;
+            color: var(--primary-yellow);
+            margin-bottom: 1.5rem;
+        }
+
+        .footer-section p, .footer-section a {
+            color: rgba(255,255,255,0.8);
+            text-decoration: none;
+            display: block;
+            margin-bottom: 0.8rem;
+            transition: all 0.3s ease;
+        }
+
+        .footer-section a:hover {
+            color: var(--primary-yellow);
+            transform: translateX(5px);
+        }
+
+        .social-links {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .social-links a {
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            background: var(--primary-yellow);
+            color: var(--dark-bg);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.3rem;
+            transition: all 0.3s ease;
+        }
+
+        .social-links a:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(255, 215, 0, 0.3);
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            color: rgba(255,255,255,0.6);
+        }
+
+        .contact-info {
+            background: rgba(255, 215, 0, 0.1);
+            padding: 1.5rem;
+            border-radius: 20px;
+            border-left: 4px solid var(--primary-yellow);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 1024px) {
+            .nav-links {
+                display: none;
+            }
+
+            .mobile-menu-toggle {
+                display: flex;
+            }
+
+            nav {
+                padding: 1rem 1.5rem;
+            }
+
+            .logo {
+                font-size: 1.5rem;
+            }
+
+            .hero-content {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+                padding: 3rem 1.5rem;
+            }
+
+            .hero-text h1 {
+                font-size: 3rem;
+            }
+
+            .hero-text .tagline {
+                font-size: 1.5rem;
+            }
+
+            .hero-buttons {
+                flex-wrap: wrap;
+            }
+
+            .section-title h2 {
+                font-size: 2.5rem;
+            }
+
+            .menu-section, .kids-section, .reviews-section, .gallery-section {
+                padding: 4rem 1.5rem;
+                margin: 0 1rem;
+                border-radius: 40px;
+            }
+
+            .menu-category, .kids-menu {
+                padding: 2rem 1.5rem;
+                border-radius: 30px;
+            }
+
+            .category-header h3 {
+                font-size: 2rem;
+            }
+
+            .menu-grid {
+                grid-template-columns: 1fr;
+                gap: 1rem;
+            }
+
+            .reviews-grid, .gallery-grid {
+                grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            }
+
+            .footer-content {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .discount-section {
+                margin: 2rem 1rem;
+                border-radius: 30px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .hero {
+                min-height: auto;
+                padding: 2rem 0;
+                border-radius: 0 0 40px 40px;
+            }
+
+            .hero-text h1 {
+                font-size: 2.5rem;
+            }
+
+            .hero-text .tagline {
+                font-size: 1.3rem;
+            }
+
+            .hero-text p {
+                font-size: 1rem;
+            }
+
+            .hero-buttons {
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            .btn-primary, .btn-secondary {
+                width: 100%;
+                text-align: center;
+            }
+
+            .hero-image img {
+                border-radius: 30px;
+            }
+
+            .section-title h2 {
+                font-size: 2rem;
+            }
+
+            .section-title p {
+                font-size: 1rem;
+            }
+
+            .discount-content h2 {
+                font-size: 2rem;
+            }
+
+            .discount-content .offer {
+                font-size: 2.5rem;
+            }
+
+            .discount-section {
+                padding: 2rem 1rem;
+            }
+
+            .category-header {
+                flex-direction: column;
+                align-items: start;
+                gap: 0.5rem;
+            }
+
+            .category-header h3 {
+                font-size: 1.8rem;
+            }
+
+            .category-icon {
+                font-size: 2rem;
+            }
+
+            .menu-item {
+                flex-direction: column;
+                align-items: start;
+                gap: 0.5rem;
+                padding: 1rem;
+                border-radius: 15px;
+            }
+
+            .menu-item:hover {
+                transform: translateX(5px);
+            }
+
+            .item-info h4 {
+                font-size: 1.1rem;
+            }
+
+            .item-price {
+                font-size: 1.3rem;
+                margin-left: 0;
+            }
+
+            .review-card {
+                padding: 1.5rem;
+                border-radius: 20px;
+            }
+
+            .gallery-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .gallery-item {
+                aspect-ratio: 16/9;
+                border-radius: 20px;
+            }
+
+            footer {
+                border-radius: 40px 40px 0 0;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .logo {
+                font-size: 1.2rem;
+            }
+
+            .hero-text h1 {
+                font-size: 2rem;
+            }
+
+            .hero-text .tagline {
+                font-size: 1.1rem;
+            }
+
+            .btn-primary, .btn-secondary {
+                padding: 0.8rem 1.5rem;
+                font-size: 0.9rem;
+            }
+
+            .menu-section, .kids-section, .reviews-section, .gallery-section {
+                padding: 3rem 1rem;
+                margin: 0;
+                border-radius: 30px;
+            }
+
+            .menu-category, .kids-menu {
+                padding: 1.5rem 1rem;
+                border-radius: 20px;
+            }
+
+            .category-header h3 {
+                font-size: 1.5rem;
+            }
+
+            .discount-section {
+                padding: 2rem 1rem;
+                margin: 1rem;
+                border-radius: 20px;
+            }
+
+            .discount-content h2 {
+                font-size: 1.5rem;
+            }
+
+            .discount-content .offer {
+                font-size: 2rem;
+            }
+
+            footer {
+                padding: 3rem 1rem 1.5rem;
+                border-radius: 30px 30px 0 0;
+            }
+
+            .footer-section h3 {
+                font-size: 1.5rem;
+            }
+
+            .contact-info {
+                padding: 1rem;
+                border-radius: 15px;
+            }
+
+            .mobile-nav {
+                width: 90%;
+                border-radius: 20px 0 0 20px;
+            }
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .fade-in {
+            animation: fadeInUp 0.8s ease-out;
+        }
+    </style>
+</head>
+<body>
+    <!-- Mobile Overlay -->
+    <div class="mobile-overlay" id="mobileOverlay"></div>
+
+    <!-- Header -->
+    <header>
+        <nav>
+            <div class="logo">
+                🍽️ DASTAN-E-ZAUK
+            </div>
+            <ul class="nav-links">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#menu">Menu</a></li>
+                <li><a href="#kids">Kids Menu</a></li>
+                <li><a href="#reviews">Reviews</a></li>
+                <li><a href="#gallery">Gallery</a></li>
+                <li><a href="#contact" class="cta-button">Order Now</a></li>
+            </ul>
+            <div class="mobile-menu-toggle" id="mobileMenuToggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Mobile Navigation -->
+    <div class="mobile-nav" id="mobileNav">
+        <ul>
+            <li><a href="#home">Home</a></li>
+            <li><a href="#menu">Menu</a></li>
+            <li><a href="#kids">Kids Menu</a></li>
+            <li><a href="#reviews">Reviews</a></li>
+            <li><a href="#gallery">Gallery</a></li>
+            <li><a href="#contact" class="cta-button">Order Now</a></li>
+        </ul>
+    </div>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <div class="hero-content">
+            <div class="hero-text">
+                <h1>DASTAN-E-ZAUK</h1>
+                <p class="tagline">Family Restaurant</p>
+                <p>Experience the authentic taste of desi cuisine with our traditional recipes passed down through generations. From sizzling tawa dishes to aromatic biryanis, we bring you the flavors of home.</p>
+                <div class="hero-buttons">
+                    <a href="#menu" class="btn-primary">Explore Menu</a>
+                    <a href="tel:03001032578" class="btn-secondary">📞 Call Now</a>
+                </div>
+            </div>
+            <div class="hero-image">
+                <img src="https://images.unsplash.com/photo-1585937421612-70a008356fbe?w=600&h=600&fit=crop" alt="Delicious Desi Food">
+            </div>
+        </div>
+    </section>
+
+    <!-- Discount Section -->
+    <section class="discount-section">
+        <div class="discount-content">
+            <h2>🎉 Special Offer! 🎉</h2>
+            <div class="offer">GET 20% OFF</div>
+            <p style="font-size: 1.3rem;">On Family Platters - Perfect for celebrations and gatherings!</p>
+            <p style="font-size: 1.1rem; margin-top: 1rem;">Order online or dine-in. Limited time offer!</p>
+        </div>
+    </section>
+
+    <!-- Menu Section -->
+    <section id="menu" class="menu-section">
+        <div class="section-title">
+            <h2>Our Signature Menu</h2>
+            <p>Crafted with love, served with care</p>
+        </div>
+
+        <div class="menu-container">
+            <!-- Soups -->
+            <div class="menu-category">
+                <div class="category-header">
+                    <span class="category-icon">🍲</span>
+                    <h3>Soups</h3>
+                </div>
+                <div class="menu-grid">
+                    <div class="menu-item">
+                        <div class="item-info">
+                            <h4>Hot & Sour Soup</h4>
+                            <p>Spicy and tangy Indo-Chinese classic</p>
+                        </div>
+                        <div class="item-price">Rs. 350/-</div>
+                    </div>
+                    <div class="menu-item">
+                        <div class="item-info">
+                            <h4>Chicken Corn Soup</h4>
+                            <p>Creamy chicken with sweet corn</p>
+                        </div>
+                        <div class="item-price">Rs. 350/-</div>
+                    </div>
+                    <div class="menu-item">
+                        <div class="item-info">
+                            <h4>Hot Soup</h4>
+                            <p>Traditional homestyle soup</p>
+                        </div>
+                        <div class="item-price">Rs. 480/-</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Chinese Corner -->
+            <div class="menu-category">
+                <div class="category-header">
+                    <span class="category-icon">🥡</span>
+                    <h3>Chinese Corner</h3>
+                </div>
+                <div class="menu-grid">
+                    <div class="menu-item">
+                        <div class="item-info">
+                            <h4>Chicken Manchurian</h4>
+                            <p>All gravies served with rice</p>
+                        </div>
+                        <div class="item-price">Rs. 800/-</div>
+                    </div>
+                    <div class="menu-item">
+                        <div class="item-info">
+                            <h4>Chicken Shashlik</h4>
+                            <p>Grilled with bell peppers & onions</p>
+                        </div>
+                        <div class="item-price">Rs. 750/-</div>
+                    </div>
+                    <div class="menu-item">
+                        <div class="item-info">
+                            <h4>Pepper Chicken</h4>
+                            <p>Spicy black pepper special</p>
+                        </div>
+                        <div class="item-price">Rs. 800/-</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Desi Corner -->
+            <div class="menu-category">
+                <div class="category-header">
+                    <span class="category-icon">🍛</span>
+                    <h3>Desi Corner</h3>
+                </div>
+                <div class="menu-grid">
+                    <div class="menu-item">
+                        <div class="item-info">
+                            <h4>Chicken Chilli Dry</h4>
+                            <p>Crispy and spicy dry chicken</p>
+                        </div>
+                        <div class="item-price">Rs. 850/-</div>
+                    </div>
+                    <div class="menu-item">
+                        <div class="item-info">
+                            <h4>Chicken Szechuan</h4>
+                            <p>Hot and spicy Szechuan style</p>
+                        </div>
+                        <div class="item-price">Rs. 850/-</div>
+                    </div>
+                    <div class="menu-item">
+                        <div class="item-info">
+                            <h4>Kung Pao Chicken</h4>
+                            <p>Classic Chinese with peanuts</p>
+                        </div>
+                        <div class="item-price">Rs. 800/-</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Handi Corner -->
+            <div class="menu-category">
+                <div class="category-header">
+                    <span class="category-icon">🍲</span>
+                    <h3>Handi Corner</h3>
+                </div>
+                <div class="menu-grid">
+                    <div class="menu-item">
+                        <div class="item-info">
+                            <h4>Chicken Handi</h4>
+                            <p>Traditional clay pot special</p>
+                        </div>
+                        <div class="item-price">Rs. 950/-</div>
+                    </div>
+                    <div class="menu-item">
+                        <div class="item-info">
+                            <h4>Chicken Achari Handi</h4>
+                            <p>Tangy pickle flavored chicken</p>
+                        </div>
+                        <div class="item-price">Rs. 1000/-</div>
+                    </div>
+                    <div class="menu-item">
+                        <div class="item-info">
+                            <h4>Mughlai Handi</h4>
+                            <p>Royal Mughlai style curry</p>
+                        </div>
+                        <div class="item-price">Rs. 1050/-</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Karahi Corner -->
+            <div class="menu-category">
+                <div class="category-header">
+                    <span class="category-icon">🍳</span>
+                    <h3>Karahi Corner</h3>
+                </div>
+                <div class="menu-grid">
+                    <div class="menu-item">
+                        <div class="item-info">
+                            <h4>Chicken Karahi (Half)</h4>
+                            <p>Authentic desi karahi</p>
+                        </div>
+                        <div class="item-price">Rs. 900/-</div>
+                    </div>
+                    <div class="menu-item">
+                        <div class="item-info">
+                            <h4>Chicken Karahi (Full)</h4>
+                            <p>Serves 4-5 persons</p>
+                        </div>
+                        <div class="item-price">Rs. 1700/-</div>
+                    </div>
+                    <div class="menu-item">
+                        <div class="item-info">
+                            <h4>Shinwari Karahi (Half)</h4>
+                            <p>Special Peshawari style</p>
+                        </div>
+                        <div class="item-price">Rs. 950/-</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Tawa Corner -->
+            <div class="menu-category">
+                <div class="category-header">
+                    <span class="category-icon">🔥</span>
+                    <h3>Tawa Corner</h3>
+                </div>
+                <div class="menu-grid">
+                    <div class="menu-item">
+                        <div class="item-info">
+                            <h4>Tawa Chicken</h4>
+                            <p>Grilled on flat iron griddle</p>
+                        </div>
+                        <div class="item-price">Rs. 550/-</div>
+                    </div>
+                    <div class="menu-item">
+                        <div class="item-info">
+                            <h4>Kabab Masala</h4>
+                            <p>Spicy kabab curry</p>
+                        </div>
+                        <div class="item-price">Rs. 850/-</div>
+                    </div>
+                    <div class="menu-item">
+                        <div class="item-info">
+                            <h4>Tawa Keema</h4>
+                            <p>Minced meat special</p>
+                        </div>
+                        <div class="item-price">Rs. 800/-</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Daal Sabzi Corner -->
+            <div class="menu-category">
+                <div class="category-header">
+                    <span class="category-icon">🥘</span>
+                    <h3>Daal Sabzi Corner</h3>
+                </div>
+                <div class="menu-grid">
+                    <div class="menu-item">
+                        <div class="item-info">
+                            <h4>Daal Mash Fry</h4>
+                            <p>Creamy white lentils</p>
+                        </div>
+                        <div class="item-price">Rs. 350/-</div>
+                    </div>
+                    <div class="menu-item">
+                        <div class="item-info">
+                            <h4>Mix Vegetables</h4>
+                            <p>Seasonal vegetable curry</p>
+                        </div>
+                        <div class="item-price">Rs. 300/-</div>
+                    </div>
+                    <div class="menu-item">
+                        <div class="item-info">
+                            <h4>Palak Paneer</h4>
+                            <p>Spinach with cottage cheese</p>
+                        </div>
+                        <div class="item-price">Rs. 350/-</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Fish Corner -->
+            <div class="menu-category">
+                <div class="category-header">
+                    <span class="category-icon">🐟</span>
+                    <h3>Fish Corner</h3>
+                </div>
+                <div class="menu-grid">
+                    <div class="menu-item">
+                        <div class="item-info">
+                            <h4>Fry Fish Rahu</h4>
+                            <p>Crispy fried fish</p>
+                        </div>
+                        <div class="item-price">Rs. 1750/-</div>
+                    </div>
+                    <div class="menu-item">
+                        <div class="item-info">
+                            <h4>Grill Fish Rahu</h4>
+                            <p>Charcoal grilled perfection</p>
+                        </div>
+                        <div class="item-price">Rs. 1600/-</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Rice Corner -->
+            <div class="menu-category">
+                <div class="category-header">
+                    <span class="category-icon">🍚</span>
+                    <h3>Rice Corner & BBQ</h3>
+                </div>
+                <div class="menu-grid">
+                    <div class="menu-item">
+                        <div class="item-info">
+                            <h4>Chicken Biryani (Half)</h4>
+                            <p>Aromatic basmati rice with chicken</p>
+                        </div>
+                        <div class="item-price">Rs. 900/-</div>
+                    </div>
+                    <div class="menu-item">
+                        <div class="item-info">
+                            <h4>Chicken Biryani (Full)</h4>
+                            <p>Family size portion</p>
+                        </div>
+                        <div class="item-price">Rs. 1400/-</div>
+                    </div>
+                    <div class="menu-item">
+                        <div class="item-info">
+                            <h4>Tika Boti (10 Pcs)</h4>
+                            <p>Grilled chicken pieces</p>
+                        </div>
+                        <div class="item-price">Rs. 900/-</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Platters -->
+            <div class="menu-category">
+                <div class="category-header">
+                    <span class="category-icon">🍱</span>
+                    <h3>Special Platters</h3>
+                </div>
+                <div class="menu-grid">
+                    <div class="menu-item">
+                        <div class="item-info">
+                            <h4>Single Plater</h4>
+                            <p>Chicken Kabab 1pc, Tika Boti 3pcs, Chicken Handi, Roghni Naan, Raita, Salad</p>
+                        </div>
+                        <div class="item-price">Rs. 650/-</div>
+                    </div>
+                    <div class="menu-item">
+                        <div class="item-info">
+                            <h4>Platter For Two</h4>
+                            <p>Chicken Kabab 2pcs, Tika Boti 3pcs, Malai Boti 3pcs, Chicken Handi, Roghni Naan 2pcs, Raita, Salad, Soft Drink</p>
+                        </div>
+                        <div class="item-price">Rs. 1150/-</div>
+                    </div>
+                    <div class="menu-item">
+                        <div class="item-info">
+                            <h4>Family Platter</h4>
+                            <p>Chicken Kabab 2pcs, Turkish Kabab 2pcs, Tika Boti 3pcs, Malai Boti 3pcs, Lebanese Boti 3pcs, Chicken Handi, Kandhari Naan 1pc, Raita, Salad, Soft Drink 1000ml</p>
+                        </div>
+                        <div class="item-price">Rs. 2500/-</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Tandoor -->
+            <div class="menu-category">
+                <div class="category-header">
+                    <span class="category-icon">🫓</span>
+                    <h3>Tandoor - Fresh Breads</h3>
+                </div>
+                <div class="menu-grid">
+                    <div class="menu-item">
+                        <div class="item-info">
+                            <h4>Sada Roti</h4>
+                            <p>Plain tandoori roti</p>
+                        </div>
+                        <div class="item-price">Rs. 15/-</div>
+                    </div>
+                    <div class="menu-item">
+                        <div class="item-info">
+                            <h4>Roghni Naan</h4>
+                            <p>Buttered naan bread</p>
+                        </div>
+                        <div class="item-price">Rs. 80/-</div>
+                    </div>
+                    <div class="menu-item">
+                        <div class="item-info">
+                            <h4>Garlic Naan</h4>
+                            <p>Garlic flavored naan</p>
+                        </div>
+                        <div class="item-price">Rs. 80/-</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Side Lines -->
+            <div class="menu-category">
+                <div class="category-header">
+                    <span class="category-icon">🥗</span>
+                    <h3>Side Lines</h3>
+                </div>
+                <div class="menu-grid">
+                    <div class="menu-item">
+                        <div class="item-info">
+                            <h4>Raita</h4>
+                            <p>Cool yogurt dip</p>
+                        </div>
+                        <div class="item-price">Rs. 120/-</div>
+                    </div>
+                    <div class="menu-item">
+                        <div class="item-info">
+                            <h4>Fresh Salad</h4>
+                            <p>Garden fresh vegetables</p>
+                        </div>
+                        <div class="item-price">Rs. 100/-</div>
+                    </div>
+                    <div class="menu-item">
+                        <div class="item-info">
+                            <h4>Kachumar Salad</h4>
+                            <p>Finely chopped veggie mix</p>
+                        </div>
+                        <div class="item-price">Rs. 130/-</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Soft Drinks -->
+            <div class="menu-category">
+                <div class="category-header">
+                    <span class="category-icon">🥤</span>
+                    <h3>Beverages</h3>
+                </div>
+                <div class="menu-grid">
+                    <div class="menu-item">
+                        <div class="item-info">
+                            <h4>Soft Drink 345ml</h4>
+                            <p>Chilled bottled drink</p>
+                        </div>
+                        <div class="item-price">Rs. 100/-</div>
+                    </div>
+                    <div class="menu-item">
+                        <div class="item-info">
+                            <h4>Soft Drink 500ml</h4>
+                            <p>Large bottled drink</p>
+                        </div>
+                        <div class="item-price">Rs. 130/-</div>
+                    </div>
+                    <div class="menu-item">
+                        <div class="item-info">
+                            <h4>Water Large</h4>
+                            <p>Mineral water bottle</p>
+                        </div>
+                        <div class="item-price">Rs. 120/-</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Kids Section -->
+    <section id="kids" class="kids-section">
+        <div class="kids-container">
+            <div class="section-title">
+                <h2>👶 Kids Special Menu 👶</h2>
+                <p>Delicious and nutritious meals for our little guests</p>
+            </div>
+
+            <div class="kids-menu">
+                <div class="category-header">
+                    <span class="category-icon">🍗</span>
+                    <h3>Kids Favorites</h3>
+                </div>
+                <div class="menu-grid">
+                    <div class="menu-item">
+                        <div class="item-info">
+                            <h4>Chicken Nuggets</h4>
+                            <p>Crispy golden nuggets with fries</p>
+                        </div>
+                        <div class="item-price">Rs. 450/-</div>
+                    </div>
+                    <div class="menu-item">
+                        <div class="item-info">
+                            <h4>Mini Cheese Pizza</h4>
+                            <p>6-inch personal pizza</p>
+                        </div>
+                        <div class="item-price">Rs. 500/-</div>
+                    </div>
+                    <div class="menu-item">
+                        <div class="item-info">
+                            <h4>Mild Chicken Karahi (Small)</h4>
+                            <p>Less spicy for kids</p>
+                        </div>
+                        <div class="item-price">Rs. 400/-</div>
+                    </div>
+                    <div class="menu-item">
+                        <div class="item-info">
+                            <h4>Plain Rice with Chicken Strips</h4>
+                            <p>Simple and tasty</p>
+                        </div>
+                        <div class="item-price">Rs. 380/-</div>
+                    </div>
+                    <div class="menu-item">
+                        <div class="item-info">
+                            <h4>Chicken Soup (Kids Portion)</h4>
+                            <p>Warm and comforting</p>
+                        </div>
+                        <div class="item-price">Rs. 200/-</div>
+                    </div>
+                    <div class="menu-item">
+                        <div class="item-info">
+                            <h4>Fresh Juice</h4>
+                            <p>Mango, Apple, or Orange</p>
+                        </div>
+                        <div class="item-price">Rs. 150/-</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Reviews Section -->
+    <section id="reviews" class="reviews-section">
+        <div class="reviews-container">
+            <div class="section-title">
+                <h2>What Our Guests Say</h2>
+                <p>Real reviews from our valued customers</p>
+            </div>
+
+            <div class="reviews-grid">
+                <div class="review-card">
+                    <div class="stars">⭐⭐⭐⭐⭐</div>
+                    <p class="review-text">"Best desi food in Lahore! The karahi is absolutely amazing and the family platter is perfect for gatherings. The ambiance is great and staff is very cooperative."</p>
+                    <div class="reviewer">
+                        <div class="reviewer-avatar">AH</div>
+                        <div class="reviewer-info">
+                            <h4>Ahmed Hassan</h4>
+                            <p>Regular Customer</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="review-card">
+                    <div class="stars">⭐⭐⭐⭐⭐</div>
+                    <p class="review-text">"The biryani here reminds me of my grandmother's cooking. Authentic taste and generous portions. The tandoori naan is fresh and delicious. Highly recommended!"</p>
+                    <div class="reviewer">
+                        <div class="reviewer-avatar">SF</div>
+                        <div class="reviewer-info">
+                            <h4>Sara Fatima</h4>
+                            <p>Food Enthusiast</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="review-card">
+                    <div class="stars">⭐⭐⭐⭐⭐</div>
+                    <p class="review-text">"Great place for family dinners! My kids love their special kids menu. The service is quick and the prices are very reasonable. Will definitely visit again!"</p>
+                    <div class="reviewer">
+                        <div class="reviewer-avatar">MK</div>
+                        <div class="reviewer-info">
+                            <h4>Muhammad Kamran</h4>
+                            <p>Family Man</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="review-card">
+                    <div class="stars">⭐⭐⭐⭐⭐</div>
+                    <p class="review-text">"Outstanding food quality! The chicken handi and roghni naan combination is my favorite. Clean environment and friendly staff. Worth every penny!"</p>
+                    <div class="reviewer">
+                        <div class="reviewer-avatar">ZA</div>
+                        <div class="reviewer-info">
+                            <h4>Zainab Ali</h4>
+                            <p>Food Blogger</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="review-card">
+                    <div class="stars">⭐⭐⭐⭐⭐</div>
+                    <p class="review-text">"The tawa chicken is to die for! Perfectly spiced and cooked. The location is convenient and parking is available. Best restaurant in Barki Road area!"</p>
+                    <div class="reviewer">
+                        <div class="reviewer-avatar">IH</div>
+                        <div class="reviewer-info">
+                            <h4>Imran Hussain</h4>
+                            <p>Local Foodie</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="review-card">
+                    <div class="stars">⭐⭐⭐⭐⭐</div>
+                    <p class="review-text">"Excellent desi cuisine with modern presentation. The family platter is perfect for special occasions. Loved the variety in their menu. Definitely coming back!"</p>
+                    <div class="reviewer">
+                        <div class="reviewer-avatar">NK</div>
+                        <div class="reviewer-info">
+                            <h4>Nadia Khan</h4>
+                            <p>Happy Customer</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Gallery Section -->
+    <section id="gallery" class="gallery-section">
+        <div class="gallery-container">
+            <div class="section-title">
+                <h2>Restaurant Gallery</h2>
+                <p>A glimpse into our culinary world</p>
+            </div>
+
+            <div class="gallery-grid">
+                <div class="gallery-item">
+                    <img src="https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=600&h=450&fit=crop" alt="Restaurant Interior">
+                    <div class="gallery-overlay">
+                        <h3>Elegant Dining Space</h3>
+                        <p>Modern and comfortable seating</p>
+                    </div>
+                </div>
+
+                <div class="gallery-item">
+                    <img src="https://images.unsplash.com/photo-1555939594-58d7cb561ad1?w=600&h=450&fit=crop" alt="Delicious Food">
+                    <div class="gallery-overlay">
+                        <h3>Signature Dishes</h3>
+                        <p>Prepared with authentic spices</p>
+                    </div>
+                </div>
+
+                <div class="gallery-item">
+                    <img src="https://images.unsplash.com/photo-1601050690597-df0568f70950?w=600&h=450&fit=crop" alt="Tandoor Kitchen">
+                    <div class="gallery-overlay">
+                        <h3>Fresh Tandoor</h3>
+                        <p>Traditional clay oven cooking</p>
+                    </div>
+                </div>
+
+                <div class="gallery-item">
+                    <img src="https://images.unsplash.com/photo-1562059390-a761a084768e?w=600&h=450&fit=crop" alt="Biryani">
+                    <div class="gallery-overlay">
+                        <h3>Aromatic Biryani</h3>
+                        <p>Layers of flavor in every bite</p>
+                    </div>
+                </div>
+
+                <div class="gallery-item">
+                    <img src="https://images.unsplash.com/photo-1567337710282-00832b415979?w=600&h=450&fit=crop" alt="Family Dining">
+                    <div class="gallery-overlay">
+                        <h3>Family Friendly</h3>
+                        <p>Perfect for celebrations</p>
+                    </div>
+                </div>
+
+                <div class="gallery-item">
+                    <img src="https://images.unsplash.com/photo-1512621776951-a57141f2eefd?w=600&h=450&fit=crop" alt="Fresh Ingredients">
+                    <div class="gallery-overlay">
+                        <h3>Fresh Ingredients</h3>
+                        <p>Quality is our priority</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer id="contact">
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>Dastan-E-Zauk</h3>
+                <p>Experience the authentic taste of desi cuisine crafted with love and served with care.</p>
+                <div class="social-links">
+                    <a href="#" title="Facebook">📘</a>
+                    <a href="#" title="Instagram">📷</a>
+                    <a href="#" title="Twitter">🐦</a>
+                    <a href="tel:03001032578" title="Call Us">📞</a>
+                </div>
+            </div>
+
+            <div class="footer-section">
+                <h3>Quick Links</h3>
+                <a href="#home">Home</a>
+                <a href="#menu">Our Menu</a>
+                <a href="#kids">Kids Menu</a>
+                <a href="#reviews">Reviews</a>
+                <a href="#gallery">Gallery</a>
+            </div>
+
+            <div class="footer-section">
+                <h3>Opening Hours</h3>
+                <p>Monday - Sunday</p>
+                <p><strong>12:00 PM - 12:00 AM</strong></p>
+                <p style="margin-top: 1rem;">We're open all week!</p>
+            </div>
+
+            <div class="footer-section">
+                <h3>Contact Us</h3>
+                <div class="contact-info">
+                    <p>📞 <strong>0300-1032578</strong></p>
+                    <p>📍 25-S Ground Floor Imperial Homes</p>
+                    <p>Near Al Mashreq Store Paragon City</p>
+                    <p>Barki Road Lahore</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            <p>&copy; 2026 Dastan-E-Zauk Family Restaurant. All rights reserved.</p>
+            <p>Designed with ❤️ for food lovers</p>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile Menu Toggle
+        const mobileMenuToggle = document.getElementById('mobileMenuToggle');
+        const mobileNav = document.getElementById('mobileNav');
+        const mobileOverlay = document.getElementById('mobileOverlay');
+        const mobileLinks = document.querySelectorAll('.mobile-nav a');
+
+        mobileMenuToggle.addEventListener('click', () => {
+            mobileMenuToggle.classList.toggle('active');
+            mobileNav.classList.toggle('active');
+            mobileOverlay.classList.toggle('active');
+            document.body.style.overflow = mobileNav.classList.contains('active') ? 'hidden' : '';
+        });
+
+        mobileOverlay.addEventListener('click', () => {
+            mobileMenuToggle.classList.remove('active');
+            mobileNav.classList.remove('active');
+            mobileOverlay.classList.remove('active');
+            document.body.style.overflow = '';
+        });
+
+        mobileLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenuToggle.classList.remove('active');
+                mobileNav.classList.remove('active');
+                mobileOverlay.classList.remove('active');
+                document.body.style.overflow = '';
+            });
+        });
+
+        // Smooth scroll behavior
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Header scroll effect
+        let lastScroll = 0;
+        window.addEventListener('scroll', () => {
+            const header = document.querySelector('header');
+            const currentScroll = window.pageYOffset;
+
+            if (currentScroll > 100) {
+                header.style.padding = '0.8rem 2rem';
+                header.style.boxShadow = '0 6px 30px rgba(0,0,0,0.15)';
+            } else {
+                header.style.padding = '1.2rem 2rem';
+                header.style.boxShadow = '0 4px 20px rgba(0,0,0,0.1)';
+            }
+
+            lastScroll = currentScroll;
+        });
+
+        // Intersection Observer for animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -100px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        // Observe menu items and cards
+        document.querySelectorAll('.menu-category, .review-card, .gallery-item').forEach(el => {
+            el.style.opacity = '0';
+            el.style.transform = 'translateY(30px)';
+            el.style.transition = 'all 0.6s ease-out';
+            observer.observe(el);
+        });
+    </script>
+</body>
+</html>
